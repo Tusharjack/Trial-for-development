@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TushuU Caller • Calls</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="content">
+      <header class="page-header">
+        <h1>Call Management</h1>
+        <div class="spacer"></div>
+        <div class="toolbar">
+          <input type="text" id="searchBox" placeholder="Search name or phone..." />
+          <select id="statusFilter">
+            <option value="">All Statuses</option>
+            <option>New</option>
+            <option>Called</option>
+            <option>Follow-up</option>
+            <option>Not Interested</option>
+          </select>
+        </div>
+      </header>
+      <section class="panel">
+        <div class="table-wrap">
+          <table class="table" id="callsTable">
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Phone</th>
+                <th>Status</th>
+                <th>Last Call</th>
+                <th>Next Follow-up</th>
+                <th>Notes</th>
+                <th>Assigned To</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <div id="callModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="callModalTitle">
+        <div class="modal-content">
+          <h2 id="callModalTitle">Calling...</h2>
+          <p id="callTimer" class="timer">00:00</p>
+          <div class="grid-2">
+            <label>
+              <span>Outcome</span>
+              <select id="callOutcome">
+                <option value="connected">Connected</option>
+                <option value="missed">Missed</option>
+              </select>
+            </label>
+            <label>
+              <span>Update Status</span>
+              <select id="callStatusUpdate">
+                <option>Called</option>
+                <option>Follow-up</option>
+                <option>Not Interested</option>
+              </select>
+            </label>
+          </div>
+          <label>
+            <span>Notes</span>
+            <textarea id="callNotes" rows="3" placeholder="Notes about this call..."></textarea>
+          </label>
+          <div class="actions">
+            <button class="btn" id="cancelCallBtn">Cancel</button>
+            <button class="btn primary" id="endCallBtn">End Call</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      App.init();
+      Auth.guard(['admin', 'telecaller']);
+      UI.renderSidebar('calls');
+      Calls.init();
+    });
+  </script>
+</body>
+</html>
+

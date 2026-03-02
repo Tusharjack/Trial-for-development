@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TushuU Caller • Admin</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="content">
+      <header class="page-header">
+        <h1>Admin</h1>
+      </header>
+
+      <section class="panel">
+        <h2>Telecallers</h2>
+        <form id="telecallerForm" class="form inline-form">
+          <input type="text" id="tcName" placeholder="Full Name" required />
+          <input type="text" id="tcUsername" placeholder="Username" required />
+          <input type="password" id="tcPassword" placeholder="Password" required />
+          <button class="btn primary" type="submit">Add</button>
+        </form>
+        <div class="table-wrap">
+          <table class="table" id="telecallerTable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Customer Leads</h2>
+        <div class="grid-2">
+          <div>
+            <label class="file">
+              <input type="file" id="leadsFile" accept=".json,application/json" />
+              <span class="btn">Upload JSON</span>
+            </label>
+            <p class="muted small">
+              JSON format: [{"name":"John Doe","phone":"9876543210","notes":""}]
+            </p>
+          </div>
+          <div class="align-right">
+            <button id="clearAllData" class="btn danger">Clear All Data</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="table" id="adminCustomersTable">
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Phone</th>
+                <th>Status</th>
+                <th>Assigned To</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      App.init();
+      Auth.guard(['admin']);
+      UI.renderSidebar('admin');
+      Admin.init();
+    });
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TushuU Caller • Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="content">
+      <header class="page-header">
+        <h1>Dashboard</h1>
+        <div class="spacer"></div>
+        <button class="btn" id="exportCsvBtn">Export CSV</button>
+      </header>
+      <section class="cards" id="metricCards">
+        <!-- metrics injected by JS -->
+      </section>
+      <section class="panel">
+        <h2>Today’s Overview</h2>
+        <div id="recentActivity" class="list"></div>
+      </section>
+    </main>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      App.init();
+      Auth.guard(['admin', 'telecaller']);
+      UI.renderSidebar('dashboard');
+      Dashboard.init();
+      document.getElementById('exportCsvBtn').addEventListener('click', Reports.exportCsv);
+    });
+  </script>
+</body>
+</html>
+
